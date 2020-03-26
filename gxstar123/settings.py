@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+FILE_CHARSET='utf-8' 
+DEFAULT_CHARSET='utf-8' 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

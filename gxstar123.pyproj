@@ -14,6 +14,7 @@
     <InterpreterId />
     <WebBrowserUrl>http://localhost</WebBrowserUrl>
     <DjangoSettingsModule>gxstar123.settings</DjangoSettingsModule>
+    <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -21,6 +22,16 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="blog\admin.py" />
+    <Compile Include="blog\apps.py" />
+    <Compile Include="blog\migrations\__init__.py" />
+    <Compile Include="blog\models.py" />
+    <Compile Include="blog\tests.py" />
+    <Compile Include="blog\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="blog\views.py" />
+    <Compile Include="blog\__init__.py" />
     <Compile Include="gxstar123\asgi.py" />
     <Compile Include="gxstar123\settings.py" />
     <Compile Include="gxstar123\urls.py" />
@@ -29,40 +40,47 @@
     <Compile Include="manage.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="blog\" />
+    <Folder Include="blog\migrations\" />
+    <Folder Include="blog\templates\" />
+    <Folder Include="blog\templates\blog\" />
     <Folder Include="gxstar123" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="blog\templates\blog\index.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <ProjectExtensions>
     <VisualStudio>
-    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-    <WebProjectProperties>
-        <AutoAssignPort>True</AutoAssignPort>
-        <UseCustomServer>True</UseCustomServer>
-        <CustomServerUrl>http://localhost</CustomServerUrl>
-        <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-    </WebProjectProperties>
-    </FlavorProperties>
-    <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
-    <WebProjectProperties>
-        <StartPageUrl>
-        </StartPageUrl>
-        <StartAction>CurrentPage</StartAction>
-        <AspNetDebugging>True</AspNetDebugging>
-        <SilverlightDebugging>False</SilverlightDebugging>
-        <NativeDebugging>False</NativeDebugging>
-        <SQLDebugging>False</SQLDebugging>
-        <ExternalProgram>
-        </ExternalProgram>
-        <StartExternalURL>
-        </StartExternalURL>
-        <StartCmdLineArguments>
-        </StartCmdLineArguments>
-        <StartWorkingDirectory>
-        </StartWorkingDirectory>
-        <EnableENC>False</EnableENC>
-        <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
-    </WebProjectProperties>
-    </FlavorProperties>
-</VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
   </ProjectExtensions>
 </Project>
