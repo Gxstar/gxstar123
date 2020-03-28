@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    <title>Gxstar123的小站--博客</title>
+</head>
+<body style="background-color: rgb(221, 220, 220);">
+    <header class="bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+            <a class="navbar-brand" href="#">Gxstar123</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">文档</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+    </header>
+    <div class="container">
+      <section class="row">
+        <div class="col-sm-7 content" style="border-right: 1px solid gray;">{% block content %}{% endblock %}</div>
+        <div class="col-sm-5 content">{% include "blog/sidebar.html" %}</div>
+      </section>
+    </div>
+
+    <footer>
+      
+      <section class="container">
+        <hr />
+        <p>Copyright by GengXing@2020</p>
+      </section>
+    </footer>
+    <!-- js文件引用 -->
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
