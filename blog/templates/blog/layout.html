@@ -10,6 +10,7 @@
 </head>
 <body style="background-color: rgb(221, 220, 220);">
     <header class="bg-dark">
+        <!-- bootstrap官网上copy的导航栏样例，改一下名字就直接可以使用 -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
             <a class="navbar-brand" href="{% url 'home' %}">Gxstar123</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +49,8 @@
     </header>
     <div class="container">
       <section class="row justify-content-between">
-        <div class="col-sm-7 content">{% block content %}{% endblock %}</div>
-        <div class="col-sm-4 content">{% include "blog/sidebar.html" %}</div>
+        <div class="col-sm-8 content">{% block content %}{% endblock %}</div>
+        <div class="col-sm-3 content">{% include "blog/sidebar.html" %}</div>
       </section>
     </div>
 
