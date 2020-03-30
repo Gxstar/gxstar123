@@ -1,5 +1,9 @@
 from django.shortcuts import render
-
+from .models import Category
 # Create your views here.
 def index(request):
-    return  render(request,'blog/index.html',{'title':'这是参数标题'})
+    AllCategory=Category.objects.all()
+    context={
+        'AllCategory':AllCategory,
+    }
+    return  render(request,'blog/index.html',context)
