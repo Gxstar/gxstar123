@@ -12,7 +12,10 @@ class Category(models.Model):
 class Article(models.Model):
     title=models.CharField('标题',max_length=100)
     author=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='用户')
+    cover=models.ImageField('封面',blank=True,null=True)
     body=RichTextField()
+    createTime=models.DateTimeField('创建时间',auto_now_add=True,null=True)
+    updateTime=models.DateTimeField('修改时间',auto_now=True)
     category=models.ForeignKey(Category,on_delete=models.DO_NOTHING,verbose_name='分类',blank=True,null=True)
     class Meta:
         verbose_name="文章"
