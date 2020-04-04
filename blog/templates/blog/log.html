@@ -1,0 +1,18 @@
+{% extends "blog/layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                登录
+            </div>
+            <div class="body">
+                <form action="/login" method="POST">
+                    <div class="form-group"><label for="username">用户名:</label><input type="text" class="form-control" id="username"></div>
+                    <div class="form-group"><label for="pwd">密码:</label><input type="text" class="form-control" id='pwd'></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
