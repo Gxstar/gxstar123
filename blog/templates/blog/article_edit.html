@@ -1,0 +1,16 @@
+{% extends 'blog/layout.html' %}
+{% block content %}
+{% ifequal user article.author %}
+<form action="." method="post">
+    <label for="title">文章标题：</label>{{myform.title}}
+    <label for="title">封面：</label>{{myform.cover}}<br />
+    <label for="title">文章：</label>
+    <textarea id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
+    <script>
+         CKEDITOR.replace( 'TextArea1' );
+    </script>
+</form>
+{% else %}
+<h3>请先登录账号</h3>
+{% endifequal %}
+{% endblock %}

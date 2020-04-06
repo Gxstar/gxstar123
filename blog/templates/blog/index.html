@@ -1,4 +1,10 @@
 {% extends "blog/layout.html" %}
 {% block content %}
-<p>这是主页部分，其他继承自layout.html</p>
+{% for article in ListArticle %}
+<h2>{{article.title}}</h2>
+{% ifequal user article.author %}
+<a href="{% url 'article_edit' article.id %}">编辑</a>
+{% endifequal %}
+<p>{{article.body|safe}}</p>
+{% endfor %}
 {% endblock %}
