@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import auth
 from .models import Category,Article
 from .forms import LoginForm,ArticleForm
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request):
@@ -20,12 +20,16 @@ def index(request):
     elif request.method=='POST':
         username=request.POST.get('username')
         pwd=request.POST.get('pwd')
-        user=auth.authenticate(username=username,password=pwd)
-        if user:
-            auth.login(request,user)
+        if 'login' in request.POST:
+            user=auth.authenticate(username=username,password=pwd)
+            if user:
+                auth.login(request,user)
+            else:
+                context.update(errorMsg='请输入正确的用户名密码！')
+                return render(request, 'blog/index.html', context)
         else:
-            context.update(errorMsg='请输入正确的用户名密码！')
-            return render(request, 'blog/index.html', context)
+            return HttpResponse('这是注册页面')
+            # User.objects.create_user(username=username,email=None,password=pwd)
     return render(request, 'blog/index.html', context)
 def category(request, category_id):
     return HttpResponse("这是分类页面%s" % category_id)
