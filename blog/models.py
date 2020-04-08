@@ -12,7 +12,7 @@ class Category(models.Model):
 class Article(models.Model):
     title=models.CharField('标题',max_length=100)
     author=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='用户')
-    cover=models.ImageField('封面',blank=True,null=True)
+    cover=models.URLField('封面地址',default='https://i.loli.net/2020/04/08/IHWehlbkQ5nxEma.jpg')
     body=RichTextField()
     createTime=models.DateTimeField('创建时间',auto_now_add=True,null=True)
     updateTime=models.DateTimeField('修改时间',auto_now=True)

@@ -1,0 +1,30 @@
+{% extends "blog/layout.html" %}
+{% block content %}
+<form action="regist" method="post" class="navbar-right" id='registForm'>
+    {% csrf_token %}
+    <div class="form-group col-md-6"><label for="id_ReUsername">用户名：</label>{{ReForm.ReUsername}}</div>
+    <div class="form-group col-md-6"><label for="id_ReEmail">email：</label>{{ReForm.ReEmail}}</div>
+    <div class="form-group col-md-6"><label for="id_RePwd">输入密码：</label>{{ReForm.RePwd}}</div>
+    <div class="form-group col-md-6"><label for="id_RePwd2">再次输入密码：</label>{{ReForm.RePwd2}}<p id="error" class='text-warning' style="font-size: x-small;"></p></div>
+    <button type="submit" class="btn btn-primary" name='regist'>注册</button>
+</form>
+<script>
+    $(function() {
+        $('#id_ReUsername').val("{{ReUsername}}");
+        $('#id_RePwd').val("{{RePwd}}");
+        $('#id_RePwd2').bind("change",function() {
+            console.log('进入调试');
+            if ($('#id_RePwd').val()!=$('#id_RePwd2').val()) {
+                console.log('不一致');
+                $('#error').html('两次输入密码不一致，请检查！');       
+                $("[name='regist']").attr("disabled",true);
+            }
+            else{
+                console.log('一致');
+                $('#error').html('');
+                $("[name='regist']").removeAttr("disabled");
+            }
+        })
+    });
+</script>
+{% endblock %}
