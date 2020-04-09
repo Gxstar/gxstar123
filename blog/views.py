@@ -24,6 +24,7 @@ def index(request):
             user=auth.authenticate(username=username,password=pwd)
             if user:
                 auth.login(request,user)
+                return render(request, 'blog/index.html', context)
             else:
                 context.update(errorMsg='请输入正确的用户名密码！')
                 return render(request, 'blog/index.html', context)
@@ -33,7 +34,7 @@ def index(request):
             ReContext['ReUsername']=username
             ReContext['RePwd']=pwd
             return render(request, 'blog/register.html', ReContext)
-    return render(request, 'blog/index.html', context)
+    # return render(request, 'blog/index.html', context)
 def category(request, category_id):
     return HttpResponse("这是分类页面%s" % category_id)
 # 文章编辑页面
@@ -50,4 +51,14 @@ def regist(request):
     username=request.POST.get('ReUsername')
     email=request.POST.get('ReEmail')
     pwd=request.POST.get('RePwd')
-    
+    pwd2=request.POST.get('RePwd2')
+    checkUser=User.objects.filter(username=username)
+    if pwd!=pwd2:
+        return HttpResponse('两次密码输入不一致请重新输入')
+    elif checkUser:
+        return HttpResponse('用户名已存在')
+    else:
+        User.objects.create_user(username,email,pwd)
+        user=auth.authenticate(username=username,password=pwd)
+        auth.login(request,user)
+        return redirect('/blog/')

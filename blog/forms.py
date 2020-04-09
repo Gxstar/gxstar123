@@ -5,7 +5,7 @@ from .models import Category
 from django.utils.translation import ugettext_lazy as _
 
 class LoginForm(AuthenticationForm):
-    LoUsername=forms.CharField(max_length=100,widget=forms.TextInput({
+    LoUsername=forms.CharField(max_length=12,widget=forms.TextInput({
         'class':'form-control',
         'placeholder':'用户名',
     }))
@@ -21,7 +21,7 @@ class ArticleForm(forms.Form):
     cover=forms.ImageField(allow_empty_file=True)
     body=forms.CharField()
 class RegisterForm(forms.Form):
-    ReUsername=forms.CharField(label='用户名',max_length=100,widget=forms.TextInput({
+    ReUsername=forms.CharField(label='用户名',max_length=12,widget=forms.TextInput({
         'class':'form-control',
         'placeholder':'用户名',
     }))

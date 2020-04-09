@@ -1,11 +1,11 @@
 {% extends "blog/layout.html" %}
 {% block content %}
-<form action="regist" method="post" class="navbar-right" id='registForm'>
+<form action="regist/" method="post" class="navbar-right text-center" id='registForm'>
     {% csrf_token %}
-    <div class="form-group col-md-6"><label for="id_ReUsername">用户名：</label>{{ReForm.ReUsername}}</div>
-    <div class="form-group col-md-6"><label for="id_ReEmail">email：</label>{{ReForm.ReEmail}}</div><p id="emailerror" class="text-warning" style="font-size: x-small;"></p>
-    <div class="form-group col-md-6"><label for="id_RePwd">输入密码：</label>{{ReForm.RePwd}}</div>
-    <div class="form-group col-md-6"><label for="id_RePwd2">再次输入密码：</label>{{ReForm.RePwd2}}<p id="error" class='text-warning' style="font-size: x-small;"></p></div>
+    <div class="form-group form-inline"><label class="text-right col-md-4" for="id_ReUsername" style="display: inline-block;">用户名：</label>{{ReForm.ReUsername}}</div>
+    <div class="form-group form-inline"><label class="text-right col-md-4"  for="id_ReEmail" style="display: inline-block;">email：</label>{{ReForm.ReEmail}}<p id="emailerror" class="text-warning m-auto" style="font-size: x-small;"></p></div>
+    <div class="form-group form-inline"><label class="text-right col-md-4"  for="id_RePwd" style="display: inline-block;">输入密码：</label>{{ReForm.RePwd}}</div>
+    <div class="form-group form-inline"><label class="text-right col-md-4"  for="id_RePwd2" style="display: inline-block;">再次输入密码：</label>{{ReForm.RePwd2}}<p id="error" class='text-warning m-auto' style="font-size: x-small;"></p></div>
     <button type="submit" class="btn btn-primary" name='regist'>注册</button>
 </form>
 <script>
@@ -14,29 +14,23 @@
         $('#id_RePwd').val("{{RePwd}}");
         // 密码验证
         $('#id_RePwd2').bind("change",function() {
-            console.log('进入调试');
             if ($('#id_RePwd').val()!=$('#id_RePwd2').val()) {
-                console.log('不一致');
                 $('#error').html('两次输入密码不一致，请检查！');       
                 $("[name='regist']").attr("disabled",true);
             }
             else{
-                console.log('一致');
                 $('#error').html('');
                 $("[name='regist']").removeAttr("disabled");
             }
         });
         // 邮箱验证
         $('#id_ReEmail').bind("change",function() {
-            console.log('进入邮箱调试');
             var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
             if (!reg.test($('#id_ReEmail').val())) {
-                console.log('不一致');
-                $('#emailerror').html('邮箱输入错误！');       
+                $('#emailerror').html('邮箱格式输入错误！');       
                 $("[name='regist']").attr("disabled",true);
             }
             else{
-                console.log('一致');
                 $('#emailerror').html('');
                 $("[name='regist']").removeAttr("disabled");
             }
