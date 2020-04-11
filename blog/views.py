@@ -34,14 +34,18 @@ def index(request):
             ReContext['ReUsername']=username
             ReContext['RePwd']=pwd
             return render(request, 'blog/register.html', ReContext)
-    # return render(request, 'blog/index.html', context)
 def category(request, category_id):
     return HttpResponse("这是分类页面%s" % category_id)
 # 文章编辑页面
 def article_edit(request,article_id):
     article=Article.objects.get(id=article_id)
-    myform=ArticleForm()
+    AllCategory = Category.objects.all()
+    myform=ArticleForm
     context={
+        'LoginForm':LoginForm,
+        'AllCategory': AllCategory,
+        'errorMsg':'',
+        'currentuser':request.user,
         'article':article,
         'myform':myform,
     }

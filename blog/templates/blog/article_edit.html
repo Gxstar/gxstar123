@@ -2,14 +2,31 @@
 {% block content %}
 {% ifequal user article.author %}
 <form action="." method="post">
-    <label for="title">文章标题：</label>{{myform.title}}
-    <label for="title">封面：</label>{{myform.cover}}<br />
-    <label for="title">文章：</label>
-    <textarea id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
-    <script>
-         CKEDITOR.replace( 'TextArea1' );
-    </script>
+    <div class="form-group"><label for="id_title">文章标题：</label>{{myform.title}}</div>
+    <div class="form-group">
+        <label for="id_author">作者：</label>
+        <select id="id_author" class="form-control">
+            <option value="{{article.author}}">{{article.author}}</option>
+        </select>
+    </div>
+    <div class="form-group"><label for="id_category">分类：</label>{{myform.category}}</div>
+    <div class="form-group"><label for="id_cover">封面：</label>{{myform.cover}}</div>
+    <div class="form-group">
+        <label for="TextArea">文章：</label>
+        <textarea id="id_body" name="id_body"></textarea>
+        <script>
+            CKEDITOR.replace("id_body");
+            $('#id_title').val("{{article.title}}");
+            $('#id_cover').val("{{article.cover}}");
+            CKEDITOR.instances.id_body.setData("{{article.body|safe}}");
+        </script>
+    </div>
+    <br>
+    <button id="articleEdit" type="button" class="btn btn-primary">提交</button>
 </form>
+<script>
+    var author='{{article.author}}';
+</script>
 {% else %}
 <h3>请先登录账号</h3>
 {% endifequal %}
