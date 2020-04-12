@@ -50,6 +50,22 @@ def article_edit(request,article_id):
         'myform':myform,
     }
     return render(request,'blog/article_edit.html',context)
+# 保存文章
+def saveArticle(request):
+    articleid=request.POST.get('id')
+    title=request.POST.get('title')
+    author=request.POST.get('author')
+    cover=request.POST.get('cover')
+    body=request.POST.get('body')
+    category=request.POST.get('category')
+    article=Article.objects.get(id=articleid)
+    article.title=title
+    article.author=User.objects.get(username=author)
+    article.cover=cover
+    article.body=body
+    article.category=Category.objects.get(category=category)
+    article.save()
+    return HttpResponse("文章保存成功！")
 # 注册页面
 def regist(request):
     username=request.POST.get('ReUsername')

@@ -2,6 +2,7 @@
 {% block content %}
 {% ifequal user article.author %}
 <form action="." method="post">
+    {% csrf_token %}
     <div class="form-group"><label for="id_title">文章标题：</label>{{myform.title}}</div>
     <div class="form-group">
         <label for="id_author">作者：</label>
@@ -13,21 +14,18 @@
     <div class="form-group"><label for="id_cover">封面：</label>{{myform.cover}}</div>
     <div class="form-group">
         <label for="TextArea">文章：</label>
-        <textarea id="id_body" name="id_body"></textarea>
+        <textarea id="id_body" name="id_body">{{article.body|safe}}</textarea>
         <script>
             CKEDITOR.replace("id_body");
             $('#id_title').val("{{article.title}}");
-            $('#id_cover').val("{{article.cover}}");
-            CKEDITOR.instances.id_body.setData("{{article.body|safe}}");
+            $('#id_cover').val("{{article.cover}}");  
+            var articleid="{{article.id}}";
         </script>
     </div>
     <br>
     <button id="articleEdit" type="button" class="btn btn-primary">提交</button>
 </form>
-<script>
-    var author='{{article.author}}';
-</script>
 {% else %}
-<h3>请先登录账号</h3>
+<h4>请先登录文章作者账号</h4>
 {% endifequal %}
 {% endblock %}

@@ -9,9 +9,15 @@ $(function(){
     $('#articleEdit').click(function() {
         CKupdate();
         $.post("saveArticle/",{
+            csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val(),
+            id:articleid,
             title:$("#id_title").val(),
-            author:author,
-
+            author:$("#id_author").val(),
+            category:$("#id_category").val(),
+            cover:$("#id_cover").val(),
+            body:CKEDITOR.instances.id_body.getData(),
+        },function(result,status){
+            alert(result);
         })
     });
 
