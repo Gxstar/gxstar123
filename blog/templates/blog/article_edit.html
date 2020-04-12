@@ -16,9 +16,11 @@
         <label for="TextArea">文章：</label>
         <textarea id="id_body" name="id_body">{{article.body|safe}}</textarea>
         <script>
+            // 设置文章预设值
             CKEDITOR.replace("id_body");
             $('#id_title').val("{{article.title}}");
-            $('#id_cover').val("{{article.cover}}");  
+            $('#id_cover').val("{{article.cover}}");
+            $("#id_category").val("{{article.category}}");
             var articleid="{{article.id}}";
         </script>
     </div>

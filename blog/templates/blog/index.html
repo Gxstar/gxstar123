@@ -1,10 +1,13 @@
 {% extends "blog/layout.html" %}
 {% block content %}
 {% for article in ListArticle %}
-<h2>{{article.title}}</h2>
+<a href=""><h5><strong>{{article.title}}</strong></h5></a>
+<p class="info"><a href="">{{article.author.username}}</a><span> • </span><time>{{article.createTime}}</time><span> • </span>
 {% ifequal user article.author %}
 <a href="{% url 'article_edit' article.id %}">编辑</a>
 {% endifequal %}
+</p>
 <p>{{article.body|safe}}</p>
+<hr>
 {% endfor %}
 {% endblock %}
