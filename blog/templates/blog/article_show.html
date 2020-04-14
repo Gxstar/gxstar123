@@ -1,0 +1,13 @@
+{% extends "blog/layout.html" %}
+{% block content %}
+<h4>{{article.title}}</h4>
+<p class="info">
+    <a href="">{{article.author.username}}</a><span> | &nbsp;分类：</span><a href="">{{article.category}}</a><span> |&nbsp;更新于：</span><time>{{article.updateTime}}</time>
+    {% ifequal user article.author %}
+    <span> | </span><a href="{% url 'article_edit' article.id %}">编辑</a>
+    {% endifequal %}
+</p>
+<article>
+    {{article.body|safe}}
+</article>
+{% endblock %}

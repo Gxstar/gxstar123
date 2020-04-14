@@ -3,11 +3,16 @@ from django.contrib import auth
 from .models import Category,Article
 from .forms import LoginForm,ArticleForm,RegisterForm
 from django.contrib.auth.models import User
+from bs4 import BeautifulSoup
 # Create your views here.
 # 首页逻辑
 def index(request):
     AllCategory = Category.objects.all()
     ListArticle=Article.objects.order_by('-id')[0:3]
+    for index,val in enumerate(ListArticle):
+        bs=BeautifulSoup(val.body,"lxml")
+        i=bs.text[0:30]
+        ListArticle[index].info=i
     context = {
         'LoginForm':LoginForm,
         'AllCategory': AllCategory,
@@ -50,6 +55,18 @@ def article_edit(request,article_id):
         'myform':myform,
     }
     return render(request,'blog/article_edit.html',context)
+# 文章展示页面
+def showArticle(request,article_id):
+    AllCategory = Category.objects.all()
+    article=Article.objects.get(id=article_id)
+    context = {
+        'LoginForm':LoginForm,
+        'AllCategory': AllCategory,
+        'errorMsg':'',
+        'currentuser':request.user,
+        'article':article
+    }
+    return render(request,'blog/article_show.html',context)
 # 保存文章
 def saveArticle(request):
     articleid=request.POST.get('id')
