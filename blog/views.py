@@ -67,6 +67,22 @@ def showArticle(request,article_id):
         'article':article
     }
     return render(request,'blog/article_show.html',context)
+# 分类展示页面
+def showCategory(request,category_id):
+    ListArticle=Article.objects.filter(category__id=category_id).order_by('-id')[0:3]
+    AllCategory = Category.objects.all()
+    for index,val in enumerate(ListArticle):
+        bs=BeautifulSoup(val.body,"lxml")
+        i=bs.text[0:30]
+        ListArticle[index].info=i
+    context = {
+        'LoginForm':LoginForm,
+        'AllCategory': AllCategory,
+        'errorMsg':'',
+        'ListArticle':ListArticle,
+        'currentuser':request.user,
+    }
+    return render(request,'blog/index.html',context)
 # 保存文章
 def saveArticle(request):
     articleid=request.POST.get('id')

@@ -2,9 +2,9 @@
 {% block content %}
 {% for article in ListArticle %}
 <a href="{% url 'showArticle' article.id %}"><h5><strong>{{article.title}}</strong></h5></a>
-<p class="info"><a href="">{{article.author.username}}</a><span> • </span><time>{{article.createTime}}</time><span> • </span>
+<p class="info"><a href="">{{article.author.username}}</a><span> • </span><time>{{article.createTime}}</time>
 {% ifequal user article.author %}
-<a href="{% url 'article_edit' article.id %}">编辑</a>
+<span> • </span><a href="{% url 'article_edit' article.id %}">编辑</a>
 {% endifequal %}
 </p>
 <p>{{article.info}}</p>
