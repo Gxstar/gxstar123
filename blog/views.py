@@ -11,7 +11,7 @@ def index(request):
     ListArticle=Article.objects.order_by('-id')[0:3]
     for index,val in enumerate(ListArticle):
         bs=BeautifulSoup(val.body,"lxml")
-        i=bs.text[0:30]
+        i=bs.get_text().strip()[0:127]
         ListArticle[index].info=i
     context = {
         'LoginForm':LoginForm,
@@ -34,11 +34,12 @@ def index(request):
                 context.update(errorMsg='请输入正确的用户名密码！')
                 return render(request, 'blog/index.html', context)
         else:
-            ReContext=context
-            ReContext['ReForm']=RegisterForm
-            ReContext['ReUsername']=username
-            ReContext['RePwd']=pwd
-            return render(request, 'blog/register.html', ReContext)
+            return HttpResponse('暂时不提供注册')
+            # ReContext=context
+            # ReContext['ReForm']=RegisterForm
+            # ReContext['ReUsername']=username
+            # ReContext['RePwd']=pwd
+            # return render(request, 'blog/register.html', ReContext)
 def category(request, category_id):
     return HttpResponse("这是分类页面%s" % category_id)
 # 文章编辑页面
@@ -52,6 +53,19 @@ def article_edit(request,article_id):
         'errorMsg':'',
         'currentuser':request.user,
         'article':article,
+        'myform':myform,
+    }
+    return render(request,'blog/article_edit.html',context)
+# 文章新建页面
+def article_create(request):
+    AllCategory = Category.objects.all()
+    myform=ArticleForm
+    context={
+        'LoginForm':LoginForm,
+        'AllCategory': AllCategory,
+        'errorMsg':'',
+        'currentuser':request.user,
+        'new':Article.objects.count()+2,
         'myform':myform,
     }
     return render(request,'blog/article_edit.html',context)
@@ -84,34 +98,38 @@ def showCategory(request,category_id):
     }
     return render(request,'blog/index.html',context)
 # 保存文章
-def saveArticle(request):
+def saveArticle(request,data):
     articleid=request.POST.get('id')
     title=request.POST.get('title')
     author=request.POST.get('author')
     cover=request.POST.get('cover')
     body=request.POST.get('body')
     category=request.POST.get('category')
-    article=Article.objects.get(id=articleid)
-    article.title=title
-    article.author=User.objects.get(username=author)
-    article.cover=cover
-    article.body=body
-    article.category=Category.objects.get(category=category)
-    article.save()
+    if int(articleid) < Article.objects.count()+2:
+        article=Article.objects.get(id=articleid)
+        article.title=title
+        article.author=User.objects.get(username=author)
+        article.cover=cover
+        article.body=body
+        article.category=Category.objects.get(category=category)
+        article.save()
+    else:
+        Article.objects.create(id=articleid,title=title,author=User.objects.get(username=author),cover=cover,body=body,category=Category.objects.get(category=category))
     return HttpResponse("文章保存成功！")
 # 注册页面
 def regist(request):
-    username=request.POST.get('ReUsername')
-    email=request.POST.get('ReEmail')
-    pwd=request.POST.get('RePwd')
-    pwd2=request.POST.get('RePwd2')
-    checkUser=User.objects.filter(username=username)
-    if pwd!=pwd2:
-        return HttpResponse('两次密码输入不一致请重新输入')
-    elif checkUser:
-        return HttpResponse('用户名已存在')
-    else:
-        User.objects.create_user(username,email,pwd)
-        user=auth.authenticate(username=username,password=pwd)
-        auth.login(request,user)
-        return redirect('/blog/')
+    return HttpResponse('暂时不提供注册')
+    # username=request.POST.get('ReUsername')
+    # email=request.POST.get('ReEmail')
+    # pwd=request.POST.get('RePwd')
+    # pwd2=request.POST.get('RePwd2')
+    # checkUser=User.objects.filter(username=username)
+    # if pwd!=pwd2:
+    #     return HttpResponse('两次密码输入不一致请重新输入')
+    # elif checkUser:
+    #     return HttpResponse('用户名已存在')
+    # else:
+    #     User.objects.create_user(username,email,pwd)
+    #     user=auth.authenticate(username=username,password=pwd)
+    #     auth.login(request,user)
+    #     return redirect('/blog/')

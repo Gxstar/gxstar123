@@ -1,6 +1,6 @@
 {% extends 'blog/layout.html' %}
 {% block content %}
-{% ifequal user article.author %}
+{% if user == article.author %}
 <form action="." method="post">
     {% csrf_token %}
     <div class="form-group"><label for="id_title">文章标题：</label>{{myform.title}}</div>
@@ -27,7 +27,31 @@
     <br>
     <button id="articleEdit" type="button" class="btn btn-primary">提交</button>
 </form>
+{% elif new%}
+<form action="." method="post">
+    {% csrf_token %}
+    <div class="form-group"><label for="id_title">文章标题：</label>{{myform.title}}</div>
+    <div class="form-group">
+        <label for="id_author">作者：</label>
+        <select id="id_author" class="form-control">
+            <option value="{{user.username}}">{{user.username}}</option>
+        </select>
+    </div>
+    <div class="form-group"><label for="id_category">分类：</label>{{myform.category}}</div>
+    <div class="form-group"><label for="id_cover">封面：</label>{{myform.cover}}</div>
+    <div class="form-group">
+        <label for="TextArea">文章：</label>
+        <textarea id="id_body" name="id_body"></textarea>
+        <script>
+            // 设置文章预设值
+            CKEDITOR.replace("id_body");
+            var articleid="{{new}}";
+        </script>
+    </div>
+    <br>
+    <button id="articleEdit" type="button" class="btn btn-primary">提交</button>
+</form>
 {% else %}
 <h4>请先登录文章作者账号</h4>
-{% endifequal %}
+{% endif %}
 {% endblock %}

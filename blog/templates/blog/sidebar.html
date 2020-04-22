@@ -5,7 +5,7 @@
         <form id="logoutForm" action="logout/" method="post" class="navbar-right">
             {% csrf_token %}
             <span class="show_block">欢迎回来：{{ user.username }}</span>
-            <a href="/admin" class='text-primary show_block'>账号管理</a>
+            <a href="{% url 'article_create' %}" class='text-primary show_block'>新文章</a>
             <button class="btn btn-secondary" type="submit" onclick="document.getElementById('logoutForm').submit()">退出</button>
         </form>
     </div>
@@ -21,7 +21,7 @@
             <p id="error" class='text-warning' style="font-size: x-small;">{{errorMsg}}</p>
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary" name='login'>登录</button>
-                <button type="submit" class="btn btn-secondary" name='register'>注册</button>
+            <button type="button" class="btn btn-secondary" name='register' onclick="alert('暂不支持注册');">注册</button>
             </div>
         </form>
     </div>
