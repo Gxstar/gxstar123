@@ -25,7 +25,7 @@ SECRET_KEY = 'pk$eue=3bw@1#$!#mjxb+-eeyt4c$=$ufkiuq^i-usp!045=-t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['121.196.12.157','127.0.0.1','172.16.91.26']
 
 
 # Application definition
@@ -124,3 +124,4 @@ DEFAULT_CHARSET='utf-8'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,"static"),]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
